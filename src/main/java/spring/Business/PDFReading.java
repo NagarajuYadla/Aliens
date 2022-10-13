@@ -22,17 +22,19 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
 public class PDFReading {
-	//Ram final resume-converted
+	
 		// Raghava CV
 		// job resume ram-converted
-		// Aishwarya nawale resume
+		//Aishwarya_nawale_resume
 		// ramesh resume final
 		// Resume updated 13 th
+	//Venkata Harikrishna_ 2022 (3)-1
+	//U.Ramanjaneyulu_Resume
 
 	public List<String> readPDF() {	
 		List<String> content = new ArrayList<>();	
 		try {		
-			PdfReader reader = new PdfReader("C:\\Users\\admin\\Downloads\\Aishwarya nawale resume.pdf");		
+			PdfReader reader = new PdfReader("C:\\Users\\admin\\Downloads\\Raghava CV.pdf");		
 			int pages = reader.getNumberOfPages();
 			for (int i = 1; i <= pages; i++) {
 				String pageContent = PdfTextExtractor.getTextFromPage(reader, i);
@@ -50,7 +52,7 @@ public class PDFReading {
 		JSONObject jsonFormat_details = new JSONObject();
 		try {		
 			int filecontent=content_array.length;
-			System.out.println("file content is "+filecontent);
+			//System.out.println("file content is "+filecontent);
 			Properties prop = new Properties();
 			prop.load(new FileReader("C:\\STS Workspace\\InHouseProject-ReadingFile_PDF\\src\\main\\resources\\application.properties"));
 			
@@ -94,14 +96,14 @@ public class PDFReading {
 				
 				if (email_matcher.find()) {
 					String email = email_matcher.group(0);
-					jsonFormat_details.put("Email:", email.toUpperCase());
+					jsonFormat_details.put("EMAIL", email.toUpperCase());
 					Matcher matcher = name_pattern.matcher(email);
 					if (matcher.find()) {
 						String name = matcher.group(0);
 						//System.out.println("Name:"+name);
 						if(!jsonFormat_details.containsKey("name"))
 						{
-							jsonFormat_details.put("Name:", name.toUpperCase());
+							jsonFormat_details.put("NAME", name.toUpperCase());
 						}
 						
 					}
@@ -112,7 +114,7 @@ public class PDFReading {
 					//System.out.println("Mobile:" + mobile);
 					if(!jsonFormat_details.containsKey("mobile"))
 					{
-						jsonFormat_details.put("Mobile:", mobile.toUpperCase());
+						jsonFormat_details.put("MOBILE", mobile.toUpperCase());
 					}
 				}
 				if (dob_matcher.find()) {
@@ -137,7 +139,7 @@ public class PDFReading {
 				if(!jsonFormat_details.containsKey("skills"))
 				{
 					List<String> skill_list_upper = skill_list.stream().map(String::toUpperCase).collect(Collectors.toList());
-					jsonFormat_details.put("Skills:", skill_list_upper);
+					jsonFormat_details.put("SKILLS", skill_list_upper);
 				}
 				boolean skip = false;
 				for(String education_dontconsider:dontConsider_educationData) {
@@ -176,7 +178,7 @@ public class PDFReading {
 			List<String> education_list_upper = education_list.stream().map(String::toUpperCase).collect(Collectors.toList());
 			if(!jsonFormat_details.containsKey("EducationDetails"))
 			{
-				jsonFormat_details.put("EducationDetails:", education_list_upper);
+				jsonFormat_details.put("EDUCATIONDETAILS", education_list_upper);
 			}
 			
 			
@@ -184,7 +186,7 @@ public class PDFReading {
 			List<String> education_list_upper1 = education_list1.stream().map(String::toUpperCase).collect(Collectors.toList());
 			if(!jsonFormat_details.containsKey("Education"))
 			{
-				jsonFormat_details.put("Education:", education_list_upper1);
+				jsonFormat_details.put("EDUCATION", education_list_upper1);
 			}
 			
 		}catch (Exception e) {
